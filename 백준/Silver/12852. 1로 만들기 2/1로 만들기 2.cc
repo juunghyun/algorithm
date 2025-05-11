@@ -17,7 +17,7 @@ int from[1000004];
 const int INF = 1e9;
 
 int go(int n){
-    if(n == 0){
+    if(n == 1){
         return 0;
     }
 
@@ -51,8 +51,6 @@ int main(){
 
     cin>>N;
     memset(dp, -1, sizeof(dp));
-
-    dp[1] = 0;
 
     cout<<go(N)<<"\n";
 
