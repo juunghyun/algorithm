@@ -1,6 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -28,26 +26,26 @@ int main() {
     // 초밥 종류별 개수 기록 배열 (1부터 d까지 사용)
     vector<int> sushiCnt(d + 1, 0);
     // 현재 윈도우 내의 초밥 종류 수
+
     int current_kinds = 0;
     int max_kinds = 0;
 
     // 2. 초기 윈도우 설정 (0부터 k-1까지)
     for (int j = 0; j < k; j++) {
         int type = sushi[j];
-        if (sushiCnt[type] == 0) {
-            current_kinds++; // 새로운 종류 추가
-        }
         sushiCnt[type]++;
     }
 
-    // 3. 초기 최대값 갱신 (쿠폰 적용)
-    if (sushiCnt[c] == 0) {
-        max_kinds = current_kinds + 1;
-    } else {
-        max_kinds = current_kinds;
+    //3. 쿠폰 적용 무조건 되니깐
+    sushiCnt[c]++;
+
+    for(auto k : sushiCnt){
+        if(k>0)current_kinds++;
     }
 
-    // 4. 슬라이딩 윈도우 이동 (i = 1부터 N-1까지)
+    max_kinds = current_kinds;
+
+
     // 윈도우의 시작점 i가 N-1까지 이동하면 모든 N가지 경우를 탐색함.
     for (int i = 1; i < N; i++) {
         
@@ -65,14 +63,8 @@ int main() {
             current_kinds++; // 새로운 종류 추가
         }
         
-        // C. 최대값 갱신 (쿠폰 적용)
-        int current_total_kinds = current_kinds;
-        // 쿠폰 초밥 c가 현재 윈도우에 없다면 (개수가 0) +1
-        if (sushiCnt[c] == 0) {
-            current_total_kinds++;
-        }
 
-        max_kinds = max(max_kinds, current_total_kinds);
+        max_kinds = max(max_kinds, current_kinds);
     }
 
     // 5. 결과 출력
