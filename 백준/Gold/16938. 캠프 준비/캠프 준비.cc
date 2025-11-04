@@ -47,10 +47,11 @@ void func(int idx, vector<int> & v, const vector<int> & question){ //현재 idx,
 
     //다 고르기 전.
 
-    vector<int> tempV = v; //현재 고른 문제 풀 받아오고
-    func(idx + 1, tempV, question); //그냥 가기
-    tempV.push_back(idx); //현재 문제 풀에 넣기
-    func(idx + 1, tempV, question); //넣은 세계선
+    
+    func(idx + 1, v, question); //그냥 가기
+    v.push_back(idx); //현재 문제 풀에 넣기
+    func(idx + 1, v, question); //넣은 세계선
+    v.pop_back();
     
 
 
